@@ -112,6 +112,11 @@ class BooksTableViewController: UITableViewController {
         let viewController = segue.destination as! BookDetailsViewController
         
         viewController.receivedBookTitle = bookDetails[(indexPath?.row)!].title
+        viewController.receivedBookAuthor = bookDetails[(indexPath?.row)!].author
+        viewController.receivedBookPublisher = bookDetails[(indexPath?.row)!].publisher
+        viewController.receivedBookTags = bookDetails[(indexPath?.row)!].categories
+        viewController.receivedBookLastCheckedOut = bookDetails[(indexPath?.row)!].lastCheckedOutBy
+        
         
     }
  

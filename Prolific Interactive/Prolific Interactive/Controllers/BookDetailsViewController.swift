@@ -11,12 +11,25 @@ import UIKit
 class BookDetailsViewController: UIViewController {
 
     var receivedBookTitle: String?
+    var receivedBookAuthor: String?
+    var receivedBookPublisher: String?
+    var receivedBookTags: String?
+    var receivedBookLastCheckedOut: String?
+    
     @IBOutlet weak var bookTitle: UILabel!
+    @IBOutlet weak var bookAuthor: UILabel!
+    @IBOutlet weak var bookPublisher: UILabel!
+    @IBOutlet weak var bookTags: UILabel!
+    @IBOutlet weak var bookLastCheckedOut: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         bookTitle.text = receivedBookTitle
+        bookAuthor.text = receivedBookAuthor
+        bookPublisher.text = "Publisher: \(receivedBookPublisher ?? "N/A")"
+        bookTags.text = "Tags: \(receivedBookTags ?? "N/A")"
+        bookLastCheckedOut.text = receivedBookLastCheckedOut
     }
 
     override func didReceiveMemoryWarning() {
