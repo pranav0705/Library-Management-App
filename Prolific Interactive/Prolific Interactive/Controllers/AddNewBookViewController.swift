@@ -27,7 +27,21 @@ class AddNewBookViewController: UIViewController {
     }
     
     @IBAction func pressedDoneBtn(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        
+        if bookTitle.text != "" || bookCategories.text != "" || bookAuthor.text != "" || bookPublisher.text != "" {
+            
+            let alert = UIAlertController(title: "Book Not Submitted", message: "You did not submit the book yet. Do you still want to exit?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true)
+            
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+        
+        
     }
     
     @IBAction func pressedSubmitBtn(_ sender: Any) {
