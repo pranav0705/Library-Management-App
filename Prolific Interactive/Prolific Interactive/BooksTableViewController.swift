@@ -15,6 +15,9 @@ class BooksTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books")!
         
         URLSession.shared.dataTask(with: url) {data,response,error in
@@ -23,7 +26,9 @@ class BooksTableViewController: UITableViewController {
             //checking response
             do {
                 self.bookDetails = try JSONDecoder().decode([BookDetails].self, from: data!)
-                print(self.bookDetails[0].author)
+                DispatchQueue.main.async { // Correct
+                   self.tableView.reloadData()
+                }
                 
            
                 
@@ -45,23 +50,22 @@ class BooksTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return bookDetails.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "books", for: indexPath) as! BooksTableViewCell
 
         // Configure the cell...
-
+        cell.bookTitle.text = bookDetails[indexPath.row].title
+        cell.bookAuthors.text = bookDetails[indexPath.row].author
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
