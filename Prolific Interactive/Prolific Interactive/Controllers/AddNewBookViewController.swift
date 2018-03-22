@@ -37,18 +37,14 @@ class AddNewBookViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
             self.present(alert, animated: true)
         } else {
-            // prepare json data
             let json: [String: Any] = ["author": bookAuthor.text!,
                                        "categories": bookCategories.text!,
                                        "title": bookTitle.text!,
                                        "publisher": bookPublisher.text!]
-            
-            // create post request
+
             let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
-            // Make sure that we include headers specifying that our request's HTTP body
-            // will be JSON encoded
             var headers = request.allHTTPHeaderFields ?? [:]
             headers["Content-Type"] = "application/json"
             request.allHTTPHeaderFields = headers
@@ -56,8 +52,6 @@ class AddNewBookViewController: UIViewController {
             let jsonData = try? JSONSerialization.data(withJSONObject: json)
             request.httpBody = jsonData
             
-            
-            // Create and run a URLSession data task with our JSON encoded POST request
             let config = URLSessionConfiguration.default
             let session = URLSession(configuration: config)
             let task = session.dataTask(with: request) { (responseData, response, responseError) in
@@ -66,15 +60,17 @@ class AddNewBookViewController: UIViewController {
                     return
                 }
                 
-                // APIs usually respond with the data you just sent in your POST request
                 if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
-                    print("response: ", utf8Representation)
+                    print("Added new book: ", utf8Representation)
                 } else {
-                    print("no readable data received in response")
+                    print("No response")
                 }
             }
             task.resume()
         }
+        
+        dismiss(animated: true, completion: nil)
+        
     }
     /*
     // MARK: - Navigation
