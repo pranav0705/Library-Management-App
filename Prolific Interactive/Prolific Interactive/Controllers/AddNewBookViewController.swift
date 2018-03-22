@@ -10,10 +10,15 @@ import UIKit
 
 class AddNewBookViewController: UIViewController {
 
+    @IBOutlet weak var bookTitle: UITextField!
+    @IBOutlet weak var bookAuthor: UITextField!
+    @IBOutlet weak var bookPublisher: UITextField!
+    @IBOutlet weak var bookCategories: UITextField!
+    @IBOutlet weak var submitBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        submitBtn.layer.cornerRadius = 8
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,6 +30,14 @@ class AddNewBookViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func pressedSubmitBtn(_ sender: Any) {
+        if bookTitle.text == "" || bookAuthor.text == "" || bookPublisher.text == "" || bookCategories.text == "" {
+            
+            let alert = UIAlertController(title: "Field Missing", message: "You must fill all the fields in order to submit", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
     /*
     // MARK: - Navigation
 

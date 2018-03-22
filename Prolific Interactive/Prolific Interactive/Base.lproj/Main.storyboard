@@ -72,6 +72,9 @@
                                     <constraint firstAttribute="height" constant="30" id="kA1-IB-VG2"/>
                                 </constraints>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="pressedSubmitBtn:" destination="Msb-3Y-mtP" eventType="touchUpInside" id="gbb-FW-gCt"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -97,6 +100,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ef3-eF-fgR"/>
                     </view>
+                    <connections>
+                        <outlet property="bookAuthor" destination="tr2-gu-1en" id="RFF-Hm-lpc"/>
+                        <outlet property="bookCategories" destination="IKx-CL-zBu" id="FC4-F9-8wB"/>
+                        <outlet property="bookPublisher" destination="vHC-ud-ao9" id="w6E-XM-XEg"/>
+                        <outlet property="bookTitle" destination="3Qa-pW-yOt" id="Ujz-gF-pRW"/>
+                        <outlet property="submitBtn" destination="rbl-kQ-kqn" id="RsW-aS-IJe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GjO-eF-wMd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
