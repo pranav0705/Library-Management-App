@@ -18,6 +18,12 @@ class BooksTableViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books")!
         
         URLSession.shared.dataTask(with: url) {data,response,error in
@@ -27,19 +33,17 @@ class BooksTableViewController: UITableViewController {
             do {
                 self.bookDetails = try JSONDecoder().decode([BookDetails].self, from: data!)
                 DispatchQueue.main.async { // Correct
-                   self.tableView.reloadData()
+                    self.tableView.reloadData()
                 }
                 
-           
+                
                 
             } catch let jsonError {
                 print("Error parsing jsonData :- \(jsonError)")
             }
             
-        }.resume()
+            }.resume()
     }
-    
-   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
