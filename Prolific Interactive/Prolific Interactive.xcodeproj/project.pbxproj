@@ -15,6 +15,7 @@
 		5512179520631A3F006F2200 /* BookDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512179420631A3F006F2200 /* BookDetails.swift */; };
 		5512179820637145006F2200 /* BooksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512179720637145006F2200 /* BooksTableViewCell.swift */; };
 		5512179B2063781A006F2200 /* AddNewBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512179A2063781A006F2200 /* AddNewBookViewController.swift */; };
+		5512179D20640C44006F2200 /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512179C20640C44006F2200 /* BookDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		5512179420631A3F006F2200 /* BookDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetails.swift; sourceTree = "<group>"; };
 		5512179720637145006F2200 /* BooksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksTableViewCell.swift; sourceTree = "<group>"; };
 		5512179A2063781A006F2200 /* AddNewBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBookViewController.swift; sourceTree = "<group>"; };
+		5512179C20640C44006F2200 /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,6 @@
 				551217862061CEC7006F2200 /* Assets.xcassets */,
 				551217882061CEC7006F2200 /* LaunchScreen.storyboard */,
 				5512178B2061CEC7006F2200 /* Info.plist */,
-				5512179120630DDB006F2200 /* BooksTableViewController.swift */,
 			);
 			path = "Prolific Interactive";
 			sourceTree = "<group>";
@@ -93,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				5512179A2063781A006F2200 /* AddNewBookViewController.swift */,
+				5512179120630DDB006F2200 /* BooksTableViewController.swift */,
+				5512179C20640C44006F2200 /* BookDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				5512179220630DDB006F2200 /* BooksTableViewController.swift in Sources */,
 				551217802061CEC7006F2200 /* AppDelegate.swift in Sources */,
 				5512179B2063781A006F2200 /* AddNewBookViewController.swift in Sources */,
+				5512179D20640C44006F2200 /* BookDetailsViewController.swift in Sources */,
 				5512179520631A3F006F2200 /* BookDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
