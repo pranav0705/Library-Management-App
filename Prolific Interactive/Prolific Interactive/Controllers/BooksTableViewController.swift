@@ -108,14 +108,21 @@ class BooksTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let indexPath = tableView.indexPathForSelectedRow
-        let viewController = segue.destination as! BookDetailsViewController
-        
-        viewController.receivedBookTitle = bookDetails[(indexPath?.row)!].title
-        viewController.receivedBookAuthor = bookDetails[(indexPath?.row)!].author
-        viewController.receivedBookPublisher = bookDetails[(indexPath?.row)!].publisher
-        viewController.receivedBookTags = bookDetails[(indexPath?.row)!].categories
-        viewController.receivedBookLastCheckedOut = bookDetails[(indexPath?.row)!].lastCheckedOutBy
+        if segue.identifier == "bookDetailsSegue" {
+         
+            let indexPath = tableView.indexPathForSelectedRow
+            let viewController = segue.destination as! BookDetailsViewController
+            
+            viewController.receivedBookTitle = bookDetails[(indexPath?.row)!].title
+            viewController.receivedBookAuthor = bookDetails[(indexPath?.row)!].author
+            viewController.receivedBookPublisher = bookDetails[(indexPath?.row)!].publisher
+            viewController.receivedBookTags = bookDetails[(indexPath?.row)!].categories
+            viewController.receivedBookLastCheckedOut = bookDetails[(indexPath?.row)!].lastCheckedOutBy
+            print(String(describing: bookDetails[(indexPath?.row)!].id!))
+            viewController.receivedId = String(describing: bookDetails[(indexPath?.row)!].id!)
+            viewController.receivedBookLastCheckedOutTime = bookDetails[(indexPath?.row)!].lastCheckedOut
+            print(bookDetails[(indexPath?.row)!].lastCheckedOut)
+        }
         
         
     }

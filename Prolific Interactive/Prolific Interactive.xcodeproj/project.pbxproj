@@ -16,6 +16,8 @@
 		5512179820637145006F2200 /* BooksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512179720637145006F2200 /* BooksTableViewCell.swift */; };
 		5512179B2063781A006F2200 /* AddNewBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512179A2063781A006F2200 /* AddNewBookViewController.swift */; };
 		5512179D20640C44006F2200 /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512179C20640C44006F2200 /* BookDetailsViewController.swift */; };
+		551217A020643B08006F2200 /* StyledButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512179F20643B08006F2200 /* StyledButtons.swift */; };
+		551217A620658852006F2200 /* DateFormatter+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551217A520658852006F2200 /* DateFormatter+Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		5512179720637145006F2200 /* BooksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksTableViewCell.swift; sourceTree = "<group>"; };
 		5512179A2063781A006F2200 /* AddNewBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewBookViewController.swift; sourceTree = "<group>"; };
 		5512179C20640C44006F2200 /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
+		5512179F20643B08006F2200 /* StyledButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButtons.swift; sourceTree = "<group>"; };
+		551217A520658852006F2200 /* DateFormatter+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Util.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 		5512177E2061CEC7006F2200 /* Prolific Interactive */ = {
 			isa = PBXGroup;
 			children = (
+				551217A12064B19F006F2200 /* NetworkManager */,
+				5512179E20643AEC006F2200 /* Extensions */,
 				5512179920637803006F2200 /* Controllers */,
 				5512179620637128006F2200 /* View */,
 				5512179320631A2F006F2200 /* Model */,
@@ -98,6 +104,22 @@
 				5512179C20640C44006F2200 /* BookDetailsViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5512179E20643AEC006F2200 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5512179F20643B08006F2200 /* StyledButtons.swift */,
+				551217A520658852006F2200 /* DateFormatter+Util.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		551217A12064B19F006F2200 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,9 +196,11 @@
 			files = (
 				5512179820637145006F2200 /* BooksTableViewCell.swift in Sources */,
 				5512179220630DDB006F2200 /* BooksTableViewController.swift in Sources */,
+				551217A020643B08006F2200 /* StyledButtons.swift in Sources */,
 				551217802061CEC7006F2200 /* AppDelegate.swift in Sources */,
 				5512179B2063781A006F2200 /* AddNewBookViewController.swift in Sources */,
 				5512179D20640C44006F2200 /* BookDetailsViewController.swift in Sources */,
+				551217A620658852006F2200 /* DateFormatter+Util.swift in Sources */,
 				5512179520631A3F006F2200 /* BookDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

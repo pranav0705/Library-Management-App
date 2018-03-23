@@ -66,12 +66,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbl-kQ-kqn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbl-kQ-kqn" customClass="StyledButtons" customModule="Prolific_Interactive" customModuleProvider="target">
                                 <rect key="frame" x="8" y="224" width="359" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="kA1-IB-VG2"/>
                                 </constraints>
                                 <state key="normal" title="Submit"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundClr">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="pressedSubmitBtn:" destination="Msb-3Y-mtP" eventType="touchUpInside" id="gbb-FW-gCt"/>
                                 </connections>
@@ -160,7 +168,7 @@
                                 <connections>
                                     <outlet property="bookAuthors" destination="RV4-g2-afd" id="Hb7-9M-NIU"/>
                                     <outlet property="bookTitle" destination="6Ye-za-Sez" id="Evd-pE-BPx"/>
-                                    <segue destination="pOT-vj-CZT" kind="show" id="11D-m7-pOk"/>
+                                    <segue destination="pOT-vj-CZT" kind="show" identifier="bookDetailsSegue" id="11D-m7-pOk"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -172,7 +180,7 @@
                     <navigationItem key="navigationItem" title="Books" id="6A5-Ro-gE2">
                         <barButtonItem key="leftBarButtonItem" title="+" id="QDR-Y1-jfx">
                             <connections>
-                                <segue destination="Msb-3Y-mtP" kind="presentation" id="tFa-di-Glh"/>
+                                <segue destination="Msb-3Y-mtP" kind="presentation" identifier="addNewBookSegue" id="tFa-di-Glh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -243,9 +251,59 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VtW-kM-6Sx" customClass="StyledButtons" customModule="Prolific_Interactive" customModuleProvider="target">
+                                <rect key="frame" x="16" y="239" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="40D-fl-BD1"/>
+                                </constraints>
+                                <state key="normal" title="Checkout">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderClr">
+                                        <color key="value" red="0.30750286100000002" green="0.66396757510000004" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundClr">
+                                        <color key="value" red="0.30750286100000002" green="0.66396757510000004" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="pressedCheckoutBtn:" destination="pOT-vj-CZT" eventType="touchUpInside" id="S68-lk-ZM5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smE-Kd-lom" customClass="StyledButtons" customModule="Prolific_Interactive" customModuleProvider="target">
+                                <rect key="frame" x="16" y="273" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="W7C-F6-5jS"/>
+                                </constraints>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundClr">
+                                        <color key="value" red="1" green="0.31841088140000001" blue="0.31164978560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderClr">
+                                        <color key="value" red="1" green="0.31841088140000001" blue="0.31164978560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="smE-Kd-lom" firstAttribute="top" secondItem="VtW-kM-6Sx" secondAttribute="bottom" constant="4" id="49v-vC-rw3"/>
                             <constraint firstItem="WlY-vM-DLB" firstAttribute="trailing" secondItem="J2Y-Nx-Q3N" secondAttribute="trailing" constant="16" id="51R-nM-1fy"/>
                             <constraint firstItem="YJZ-40-5P5" firstAttribute="top" secondItem="ur4-hj-L12" secondAttribute="bottom" constant="4" id="7CN-5Q-LLZ"/>
                             <constraint firstItem="YJZ-40-5P5" firstAttribute="leading" secondItem="WlY-vM-DLB" secondAttribute="leading" constant="16" id="8ym-z2-FzD"/>
@@ -256,12 +314,17 @@
                             <constraint firstItem="UyD-6a-XMY" firstAttribute="top" secondItem="Mge-Wk-U2I" secondAttribute="bottom" constant="4" id="JFy-i1-bJr"/>
                             <constraint firstItem="zBv-UO-UkP" firstAttribute="top" secondItem="UyD-6a-XMY" secondAttribute="bottom" constant="4" id="OAR-JO-NHy"/>
                             <constraint firstItem="WlY-vM-DLB" firstAttribute="trailing" secondItem="YJZ-40-5P5" secondAttribute="trailing" constant="16" id="OmU-Tb-BCP"/>
+                            <constraint firstItem="WlY-vM-DLB" firstAttribute="trailing" secondItem="VtW-kM-6Sx" secondAttribute="trailing" constant="16" id="P5V-wj-c0i"/>
                             <constraint firstItem="Mge-Wk-U2I" firstAttribute="leading" secondItem="WlY-vM-DLB" secondAttribute="leading" constant="16" id="Q2Z-bm-Cd8"/>
                             <constraint firstItem="ur4-hj-L12" firstAttribute="leading" secondItem="WlY-vM-DLB" secondAttribute="leading" constant="16" id="RS4-w1-fZM"/>
+                            <constraint firstItem="VtW-kM-6Sx" firstAttribute="top" secondItem="J2Y-Nx-Q3N" secondAttribute="bottom" constant="4" id="RYm-a2-KV9"/>
                             <constraint firstItem="UyD-6a-XMY" firstAttribute="leading" secondItem="WlY-vM-DLB" secondAttribute="leading" constant="16" id="UI1-Ne-fGU"/>
                             <constraint firstItem="WlY-vM-DLB" firstAttribute="trailing" secondItem="UyD-6a-XMY" secondAttribute="trailing" constant="16" id="Unt-RV-OdX"/>
                             <constraint firstItem="zBv-UO-UkP" firstAttribute="leading" secondItem="WlY-vM-DLB" secondAttribute="leading" constant="16" id="Wop-Ho-sdI"/>
+                            <constraint firstItem="smE-Kd-lom" firstAttribute="leading" secondItem="WlY-vM-DLB" secondAttribute="leading" constant="16" id="dE9-Lo-IH5"/>
+                            <constraint firstItem="WlY-vM-DLB" firstAttribute="trailing" secondItem="smE-Kd-lom" secondAttribute="trailing" constant="16" id="eRO-1h-euc"/>
                             <constraint firstItem="WlY-vM-DLB" firstAttribute="trailing" secondItem="Mge-Wk-U2I" secondAttribute="trailing" constant="16" id="hFj-5J-QeH"/>
+                            <constraint firstItem="VtW-kM-6Sx" firstAttribute="leading" secondItem="WlY-vM-DLB" secondAttribute="leading" constant="16" id="owf-FI-gfk"/>
                             <constraint firstItem="WlY-vM-DLB" firstAttribute="trailing" secondItem="ur4-hj-L12" secondAttribute="trailing" constant="16" id="pgk-2L-prm"/>
                             <constraint firstItem="ur4-hj-L12" firstAttribute="top" secondItem="zBv-UO-UkP" secondAttribute="bottom" constant="4" id="uxK-eo-h2K"/>
                         </constraints>
@@ -277,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hf1-s1-C0U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2427" y="178"/>
+            <point key="canvasLocation" x="2454" y="190"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sCj-ex-g68">
