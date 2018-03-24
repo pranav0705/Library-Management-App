@@ -60,6 +60,15 @@ class BooksTableViewController: UITableViewController {
         cell.bookTitle.text = bookDetails[indexPath.row].title
         cell.bookAuthors.text = bookDetails[indexPath.row].author
         
+        if let checkedOutBy = bookDetails[indexPath.row].lastCheckedOutBy {
+            cell.bookCheckedOutBy.text = "Last Checked out by : \(checkedOutBy)"
+        } else {
+            cell.bookCheckedOutBy.text = ""
+        }
+        
+        let image : UIImage = UIImage(named:"Book1")!
+        cell.bookImage.image = image
+        
         let content : UIView = cell.viewWithTag(2) as UIView!
         content.backgroundColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
         cell.setNeedsLayout()
