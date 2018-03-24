@@ -11,6 +11,7 @@ import UIKit
 class BooksTableViewController: UITableViewController {
 
     var bookDetails = [BookDetails]()
+    var imageNumbers = [Int:String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +60,49 @@ class BooksTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "books", for: indexPath) as! BooksTableViewCell
         cell.bookTitle.text = bookDetails[indexPath.row].title
         cell.bookAuthors.text = bookDetails[indexPath.row].author
+        
+        if let checkedOutBy = bookDetails[indexPath.row].lastCheckedOutBy {
+            cell.bookCheckedOutBy.text = "Last Checked out by : \(checkedOutBy)"
+        } else {
+            cell.bookCheckedOutBy.text = ""
+        }
+        
+        if let imageNumExists = imageNumbers[indexPath.row] {
+            let image : UIImage = UIImage(named:"Book\(imageNumExists)")!
+            cell.bookImage.image = image
+        } else {
+            let bookNum = arc4random_uniform(5) + 1;
+            imageNumbers[indexPath.row] = String(bookNum)
+            let image : UIImage = UIImage(named:"Book\(String(bookNum))")!
+            cell.bookImage.image = image
+        }
+        
+        
+        
+        let content : UIView = cell.viewWithTag(2) as UIView!
+        content.backgroundColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
+        cell.setNeedsLayout()
+        cell.layoutIfNeeded()
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        cell.alpha = 0.0
+        let myVIew : UIView = cell.viewWithTag(1) as UIView!
+        myVIew.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        myVIew.layer.shadowOffset = CGSize.zero
+        myVIew.layer.shadowRadius = 4
+        myVIew.layer.shadowOpacity = 0.8
+        myVIew.layer.shadowPath = UIBezierPath(rect: myVIew.bounds).cgPath
+        myVIew.layer.masksToBounds = false
+        myVIew.layer.shouldRasterize = true
+        
+        UIView.animate(withDuration: 1.0) {
+            cell.alpha = 1.0
+        }
+        
     }
 
     /*
@@ -97,30 +140,36 @@ class BooksTableViewController: UITableViewController {
     }
     */
     @IBAction func pressedDeleteBtn(_ sender: Any) {
-        let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/clean")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
-        var headers = request.allHTTPHeaderFields ?? [:]
-        headers["Content-Type"] = "application/json"
-        request.allHTTPHeaderFields = headers
         
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request) { (responseData, response, responseError) in
-            guard responseError == nil else {
-                return
-            }
+        let alert = UIAlertController(title: "Delete all Books?", message: "Do you really want to delete all books?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/clean")!
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            var headers = request.allHTTPHeaderFields ?? [:]
+            headers["Content-Type"] = "application/json"
+            request.allHTTPHeaderFields = headers
             
-            if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
-                print("All book Deleted: ", utf8Representation)
-                self.fetchBooks()
+            let config = URLSessionConfiguration.default
+            let session = URLSession(configuration: config)
+            let task = session.dataTask(with: request) { (responseData, response, responseError) in
+                guard responseError == nil else {
+                    return
+                }
                 
-            } else {
-                print("All book not deleted")
-                self.fetchBooks()
+                if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
+                    print("All book Deleted: ", utf8Representation)
+                    self.fetchBooks()
+                    
+                } else {
+                    print("All book not deleted")
+                    self.fetchBooks()
+                }
             }
-        }
-        task.resume()
+            task.resume()
+        }))
+        self.present(alert, animated: true)
         
     }
     

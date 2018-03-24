@@ -89,30 +89,35 @@ class BookDetailsViewController: UIViewController {
    
     @IBAction func pressedDeleteBtn(_ sender: Any) {
         
-        let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books/\(receivedId!)")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
-        var headers = request.allHTTPHeaderFields ?? [:]
-        headers["Content-Type"] = "application/json"
-        request.allHTTPHeaderFields = headers
-        
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request) { (responseData, response, responseError) in
-            guard responseError == nil else {
-                //
-                return
-            }
+        let alert = UIAlertController(title: "Delete Book?", message: "Do you want to delete this book?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books/\(self.receivedId!)")!
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            var headers = request.allHTTPHeaderFields ?? [:]
+            headers["Content-Type"] = "application/json"
+            request.allHTTPHeaderFields = headers
             
-            if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
-                print("Book Deleted: ", utf8Representation)
-                self.popUpViewController()
-            } else {
-                print("Book not deleted")
-                 self.popUpViewController()
+            let config = URLSessionConfiguration.default
+            let session = URLSession(configuration: config)
+            let task = session.dataTask(with: request) { (responseData, response, responseError) in
+                guard responseError == nil else {
+                    //
+                    return
+                }
+                
+                if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
+                    print("Book Deleted: ", utf8Representation)
+                    self.popUpViewController()
+                } else {
+                    print("Book not deleted")
+                    self.popUpViewController()
+                }
             }
-        }
-        task.resume()
+            task.resume()
+        }))
+        self.present(alert, animated: true)
        
     }
     
