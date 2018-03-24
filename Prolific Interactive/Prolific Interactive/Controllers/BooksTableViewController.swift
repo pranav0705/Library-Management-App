@@ -176,8 +176,9 @@ class BooksTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "bookDetailsSegue" {
-         
             let indexPath = tableView.indexPathForSelectedRow
+            let cell = self.tableView.cellForRow(at: indexPath!) as! BooksTableViewCell
+            
             let viewController = segue.destination as! BookDetailsViewController
             
             viewController.receivedBookTitle = bookDetails[(indexPath?.row)!].title
@@ -187,6 +188,7 @@ class BooksTableViewController: UITableViewController {
             viewController.receivedBookLastCheckedOut = bookDetails[(indexPath?.row)!].lastCheckedOutBy
             viewController.receivedId = String(describing: bookDetails[(indexPath?.row)!].id!)
             viewController.receivedBookLastCheckedOutTime = bookDetails[(indexPath?.row)!].lastCheckedOut
+            viewController.receivedImage = cell.bookImage.image
         }
     }
 }
