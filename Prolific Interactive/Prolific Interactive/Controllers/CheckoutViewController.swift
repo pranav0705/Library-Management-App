@@ -60,8 +60,6 @@ class CheckoutViewController: UIViewController {
                         myDelegate.refresh()
                         self.dismiss(animated: true, completion: nil)
                     }
-                    
-                    
                 } else {
                     print("Book not checkedout")
                     self.dismiss(animated: true, completion: nil)
@@ -74,16 +72,9 @@ class CheckoutViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
     /*
     // MARK: - Navigation
 
