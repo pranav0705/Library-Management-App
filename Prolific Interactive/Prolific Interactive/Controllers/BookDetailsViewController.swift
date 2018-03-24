@@ -17,6 +17,7 @@ class BookDetailsViewController: UIViewController {
     var receivedBookLastCheckedOut: String?
     var receivedId: String?
     var receivedBookLastCheckedOutTime: String?
+    var receivedImage: UIImage?
     
     
     @IBOutlet weak var bookTitle: UILabel!
@@ -24,6 +25,7 @@ class BookDetailsViewController: UIViewController {
     @IBOutlet weak var bookPublisher: UILabel!
     @IBOutlet weak var bookTags: UILabel!
     @IBOutlet weak var bookLastCheckedOut: UILabel!
+    @IBOutlet weak var bookImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,8 +65,8 @@ class BookDetailsViewController: UIViewController {
         
         bookTitle.text = receivedBookTitle
         bookAuthor.text = receivedBookAuthor
-        bookPublisher.text = "Publisher: \(receivedBookPublisher ?? "N/A")"
-        bookTags.text = "Tags: \(receivedBookTags ?? "N/A")"
+        bookPublisher.text = "\(receivedBookPublisher ?? "N/A")"
+        bookTags.text = "\(receivedBookTags ?? "N/A")"
         
         if receivedBookLastCheckedOutTime == nil {
             bookLastCheckedOut.text = ""
@@ -81,6 +83,8 @@ class BookDetailsViewController: UIViewController {
             
             bookLastCheckedOut.text = "\(receivedBookLastCheckedOut!) @ \(checkedOutTimeInLocal)"
         }
+        
+        bookImage.image = receivedImage!
         
     }
     
