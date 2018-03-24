@@ -59,7 +59,31 @@ class BooksTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "books", for: indexPath) as! BooksTableViewCell
         cell.bookTitle.text = bookDetails[indexPath.row].title
         cell.bookAuthors.text = bookDetails[indexPath.row].author
+        
+        let content : UIView = cell.viewWithTag(2) as UIView!
+        content.backgroundColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
+        cell.setNeedsLayout()
+        cell.layoutIfNeeded()
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        cell.alpha = 0.0
+        let myVIew : UIView = cell.viewWithTag(1) as UIView!
+        myVIew.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        myVIew.layer.shadowOffset = CGSize.zero
+        myVIew.layer.shadowRadius = 4
+        myVIew.layer.shadowOpacity = 0.8
+        myVIew.layer.shadowPath = UIBezierPath(rect: myVIew.bounds).cgPath
+        myVIew.layer.masksToBounds = false
+        myVIew.layer.shouldRasterize = true
+        
+        UIView.animate(withDuration: 1.0) {
+            cell.alpha = 1.0
+        }
+        
     }
 
     /*
