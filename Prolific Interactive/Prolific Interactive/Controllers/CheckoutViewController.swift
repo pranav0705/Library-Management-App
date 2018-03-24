@@ -36,7 +36,6 @@ class CheckoutViewController: UIViewController {
             
             let json: [String: Any] = ["lastCheckedOutBy": nameTxtField.text!,"lastCheckedOut":dt]
             let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books/\(String(describing: receivedBookid!))")!
-            print(url)
             var request = URLRequest(url: url)
             request.httpMethod = "PUT"
             var headers = request.allHTTPHeaderFields ?? [:]

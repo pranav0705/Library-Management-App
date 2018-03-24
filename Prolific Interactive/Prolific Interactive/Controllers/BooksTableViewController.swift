@@ -118,14 +118,8 @@ class BooksTableViewController: UITableViewController {
             viewController.receivedBookPublisher = bookDetails[(indexPath?.row)!].publisher
             viewController.receivedBookTags = bookDetails[(indexPath?.row)!].categories
             viewController.receivedBookLastCheckedOut = bookDetails[(indexPath?.row)!].lastCheckedOutBy
-            print(String(describing: bookDetails[(indexPath?.row)!].id!))
             viewController.receivedId = String(describing: bookDetails[(indexPath?.row)!].id!)
             viewController.receivedBookLastCheckedOutTime = bookDetails[(indexPath?.row)!].lastCheckedOut
-            print(bookDetails[(indexPath?.row)!].lastCheckedOut)
         }
-        
-        
     }
- 
-
 }
