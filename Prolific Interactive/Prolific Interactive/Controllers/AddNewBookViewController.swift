@@ -9,6 +9,7 @@
 import UIKit
 
 class AddNewBookViewController: UIViewController {
+    
 
     @IBOutlet weak var bookTitle: UITextField!
     @IBOutlet weak var bookAuthor: UITextField!
@@ -76,6 +77,7 @@ class AddNewBookViewController: UIViewController {
                 
                 if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
                     print("Added new book: ", utf8Representation)
+                    self.dismiss(animated: true, completion: nil)
                 } else {
                     print("No response")
                 }
@@ -83,7 +85,7 @@ class AddNewBookViewController: UIViewController {
             task.resume()
         }
         
-        dismiss(animated: true, completion: nil)
+        
         
     }
     /*

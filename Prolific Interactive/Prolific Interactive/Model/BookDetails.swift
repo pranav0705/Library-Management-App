@@ -15,6 +15,7 @@ struct BookDetails: Decodable {
     var id: Int?
     var lastCheckedOut: String?
     var lastCheckedOutBy: String?
+    var publisher: String?
     var title: String?
     var url: String?
 }
