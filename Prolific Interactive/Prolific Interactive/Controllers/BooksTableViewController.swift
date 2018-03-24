@@ -105,7 +105,10 @@ class BooksTableViewController: UITableViewController {
         return true
     }
     */
-
+    @IBAction func pressedDeleteBtn(_ sender: Any) {
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "bookDetailsSegue" {

@@ -178,9 +178,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Books" id="6A5-Ro-gE2">
-                        <barButtonItem key="leftBarButtonItem" title="+" id="QDR-Y1-jfx">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="QDR-Y1-jfx">
                             <connections>
                                 <segue destination="Msb-3Y-mtP" kind="presentation" identifier="addNewBookSegue" id="tFa-di-Glh"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Delete" id="7aO-9k-6S5">
+                            <connections>
+                                <action selector="pressedDeleteBtn:" destination="qty-ol-nDv" id="f6F-bg-E8S"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
