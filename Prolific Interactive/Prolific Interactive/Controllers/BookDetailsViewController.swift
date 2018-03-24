@@ -18,6 +18,7 @@ class BookDetailsViewController: UIViewController {
     var receivedId: String?
     var receivedBookLastCheckedOutTime: String?
     
+    
     @IBOutlet weak var bookTitle: UILabel!
     @IBOutlet weak var bookAuthor: UILabel!
     @IBOutlet weak var bookPublisher: UILabel!
@@ -27,26 +28,7 @@ class BookDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        bookTitle.text = receivedBookTitle
-        bookAuthor.text = receivedBookAuthor
-        bookPublisher.text = "Publisher: \(receivedBookPublisher ?? "N/A")"
-        bookTags.text = "Tags: \(receivedBookTags ?? "N/A")"
-        
-        if receivedBookLastCheckedOutTime == nil {
-            bookLastCheckedOut.text = ""
-        } else {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC") as TimeZone!
-            
-            let utcDate = dateFormatter.date(from: receivedBookLastCheckedOutTime!)
-            
-            dateFormatter.dateFormat = "MMM d, yyyy hh:mm a"
-            dateFormatter.timeZone = TimeZone.current
-            let checkedOutTimeInLocal = dateFormatter.string(from: utcDate!)
-            
-            bookLastCheckedOut.text = "\(receivedBookLastCheckedOut!) @ \(checkedOutTimeInLocal)"
-        }
+        setupUI()
         
         
         
@@ -78,55 +60,88 @@ class BookDetailsViewController: UIViewController {
         
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        print("yes")
-    }
-
-    @IBAction func pressedCheckoutBtn(_ sender: Any) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
-        let dt = formatter.string(from: Date())
-        print(dt)
+    func setupUI() {
         
-        let json: [String: Any] = ["lastCheckedOutBy": "Pranav Bhandari","lastCheckedOut":dt]
-        let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books/\(String(describing: receivedId!))")!
-        print(url)
-        var request = URLRequest(url: url)
-        request.httpMethod = "PUT"
-        var headers = request.allHTTPHeaderFields ?? [:]
-        headers["Content-Type"] = "application/json"
-        request.allHTTPHeaderFields = headers
+        bookTitle.text = receivedBookTitle
+        bookAuthor.text = receivedBookAuthor
+        bookPublisher.text = "Publisher: \(receivedBookPublisher ?? "N/A")"
+        bookTags.text = "Tags: \(receivedBookTags ?? "N/A")"
         
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
-        request.httpBody = jsonData
-        
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request) { (responseData, response, responseError) in
-            guard responseError == nil else {
-                //
-                return
-            }
+        if receivedBookLastCheckedOutTime == nil {
+            bookLastCheckedOut.text = ""
+        } else {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC") as TimeZone!
             
-            if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
-                print("Checked out book: ", utf8Representation)
-            } else {
-                print("Book not checkedout")
-            }
+            let utcDate = dateFormatter.date(from: receivedBookLastCheckedOutTime!)
+            
+            dateFormatter.dateFormat = "MMM d, yyyy hh:mm a"
+            dateFormatter.timeZone = TimeZone.current
+            let checkedOutTimeInLocal = dateFormatter.string(from: utcDate!)
+            
+            bookLastCheckedOut.text = "\(receivedBookLastCheckedOut!) @ \(checkedOutTimeInLocal)"
         }
-        task.resume()
         
+    }
+    
+    @IBAction func pressedCheckoutBtn(_ sender: Any) {
+       
         
         //_ = navigationController?.popViewController(animated: true)
     }
-    /*
+   
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "openCheckoutPopUpSegue" {
+            let viewController = segue.destination as! CheckoutViewController
+            viewController.delegate = self
+            viewController.receivedBookid = receivedId!
+        }
+        
     }
-    */
 
+}
+
+extension BookDetailsViewController: refreshBookDetails {
+    func refresh() {
+        
+        let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books/\(receivedId!)")!
+        
+        URLSession.shared.dataTask(with: url) {data,response,error in
+            //checking error
+            
+            //checking response
+            do {
+                guard let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String:Any] else { return }
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC") as TimeZone!
+                
+                let utcDate = dateFormatter.date(from: json["lastCheckedOut"]! as! String)
+                
+                dateFormatter.dateFormat = "MMM d, yyyy hh:mm a"
+                dateFormatter.timeZone = TimeZone.current
+                let checkedOutTimeInLocal = dateFormatter.string(from: utcDate!)
+                
+                DispatchQueue.main.async {
+                    self.bookLastCheckedOut.text = "\(json["lastCheckedOutBy"]!) @ \(checkedOutTimeInLocal)"
+                }
+                
+            } catch let jsonErr {
+                print(jsonErr)
+            }
+            
+            }.resume()
+        
+    }
+    
+    
 }

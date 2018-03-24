@@ -261,21 +261,21 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
+                                        <real key="value" value="16"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderClr">
-                                        <color key="value" red="0.30750286100000002" green="0.66396757510000004" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="0.31841088140000001" blue="0.31164978560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundClr">
-                                        <color key="value" red="0.30750286100000002" green="0.66396757510000004" blue="0.66666668650000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="0.31841088140000001" blue="0.31164978560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="pressedCheckoutBtn:" destination="pOT-vj-CZT" eventType="touchUpInside" id="S68-lk-ZM5"/>
-                                    <segue destination="x9s-ZM-1mz" kind="presentation" id="cZk-c0-hmc"/>
+                                    <segue destination="x9s-ZM-1mz" kind="presentation" identifier="openCheckoutPopUpSegue" id="cZk-c0-hmc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smE-Kd-lom" customClass="StyledButtons" customModule="Prolific_Interactive" customModuleProvider="target">
@@ -284,14 +284,11 @@
                                     <constraint firstAttribute="height" constant="30" id="W7C-F6-5jS"/>
                                 </constraints>
                                 <state key="normal" title="Delete">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="0.31841088140000001" blue="0.31164978560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundClr">
-                                        <color key="value" red="1" green="0.31841088140000001" blue="0.31164978560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <real key="value" value="16"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderClr">
                                         <color key="value" red="1" green="0.31841088140000001" blue="0.31164978560000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -346,7 +343,7 @@
         <!--Checkout View Controller-->
         <scene sceneID="YWd-uh-gRC">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="x9s-ZM-1mz" customClass="CheckoutViewController" customModule="Prolific_Interactive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="x9s-ZM-1mz" customClass="CheckoutViewController" customModule="Prolific_Interactive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Ma-6C-Leg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -505,6 +502,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nYt-8P-aUM"/>
                     </view>
+                    <connections>
+                        <outlet property="nameTxtField" destination="8j4-Ec-Rnm" id="D8Y-Mv-39H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JSo-vu-2sS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
