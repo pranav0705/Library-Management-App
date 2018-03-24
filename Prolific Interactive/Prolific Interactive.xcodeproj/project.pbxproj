@@ -18,6 +18,8 @@
 		5512179D20640C44006F2200 /* BookDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512179C20640C44006F2200 /* BookDetailsViewController.swift */; };
 		551217A020643B08006F2200 /* StyledButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512179F20643B08006F2200 /* StyledButtons.swift */; };
 		551217A620658852006F2200 /* DateFormatter+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551217A520658852006F2200 /* DateFormatter+Util.swift */; };
+		551217A82065E23E006F2200 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551217A72065E23E006F2200 /* CheckoutViewController.swift */; };
+		551217AA2065E87F006F2200 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551217A92065E87F006F2200 /* UIView+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		5512179C20640C44006F2200 /* BookDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsViewController.swift; sourceTree = "<group>"; };
 		5512179F20643B08006F2200 /* StyledButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButtons.swift; sourceTree = "<group>"; };
 		551217A520658852006F2200 /* DateFormatter+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Util.swift"; sourceTree = "<group>"; };
+		551217A72065E23E006F2200 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		551217A92065E87F006F2200 /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 				5512179A2063781A006F2200 /* AddNewBookViewController.swift */,
 				5512179120630DDB006F2200 /* BooksTableViewController.swift */,
 				5512179C20640C44006F2200 /* BookDetailsViewController.swift */,
+				551217A72065E23E006F2200 /* CheckoutViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -111,6 +116,7 @@
 			children = (
 				5512179F20643B08006F2200 /* StyledButtons.swift */,
 				551217A520658852006F2200 /* DateFormatter+Util.swift */,
+				551217A92065E87F006F2200 /* UIView+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -196,11 +202,13 @@
 			files = (
 				5512179820637145006F2200 /* BooksTableViewCell.swift in Sources */,
 				5512179220630DDB006F2200 /* BooksTableViewController.swift in Sources */,
+				551217AA2065E87F006F2200 /* UIView+Utils.swift in Sources */,
 				551217A020643B08006F2200 /* StyledButtons.swift in Sources */,
 				551217802061CEC7006F2200 /* AppDelegate.swift in Sources */,
 				5512179B2063781A006F2200 /* AddNewBookViewController.swift in Sources */,
 				5512179D20640C44006F2200 /* BookDetailsViewController.swift in Sources */,
 				551217A620658852006F2200 /* DateFormatter+Util.swift in Sources */,
+				551217A82065E23E006F2200 /* CheckoutViewController.swift in Sources */,
 				5512179520631A3F006F2200 /* BookDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

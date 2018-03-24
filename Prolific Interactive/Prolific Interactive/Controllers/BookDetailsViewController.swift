@@ -32,7 +32,6 @@ class BookDetailsViewController: UIViewController {
         bookPublisher.text = "Publisher: \(receivedBookPublisher ?? "N/A")"
         bookTags.text = "Tags: \(receivedBookTags ?? "N/A")"
         
-        
         if receivedBookLastCheckedOutTime == nil {
             bookLastCheckedOut.text = ""
         } else {
@@ -79,9 +78,8 @@ class BookDetailsViewController: UIViewController {
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        print("yes")
     }
 
     @IBAction func pressedCheckoutBtn(_ sender: Any) {
