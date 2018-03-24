@@ -121,30 +121,36 @@ class BooksTableViewController: UITableViewController {
     }
     */
     @IBAction func pressedDeleteBtn(_ sender: Any) {
-        let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/clean")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
-        var headers = request.allHTTPHeaderFields ?? [:]
-        headers["Content-Type"] = "application/json"
-        request.allHTTPHeaderFields = headers
         
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request) { (responseData, response, responseError) in
-            guard responseError == nil else {
-                return
-            }
+        let alert = UIAlertController(title: "Delete all Books?", message: "Do you really want to delete all books?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/clean")!
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            var headers = request.allHTTPHeaderFields ?? [:]
+            headers["Content-Type"] = "application/json"
+            request.allHTTPHeaderFields = headers
             
-            if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
-                print("All book Deleted: ", utf8Representation)
-                self.fetchBooks()
+            let config = URLSessionConfiguration.default
+            let session = URLSession(configuration: config)
+            let task = session.dataTask(with: request) { (responseData, response, responseError) in
+                guard responseError == nil else {
+                    return
+                }
                 
-            } else {
-                print("All book not deleted")
-                self.fetchBooks()
+                if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
+                    print("All book Deleted: ", utf8Representation)
+                    self.fetchBooks()
+                    
+                } else {
+                    print("All book not deleted")
+                    self.fetchBooks()
+                }
             }
-        }
-        task.resume()
+            task.resume()
+        }))
+        self.present(alert, animated: true)
         
     }
     
