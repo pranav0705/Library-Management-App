@@ -18,8 +18,6 @@ class AddNewBookViewController: UIViewController {
     @IBOutlet weak var submitBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        submitBtn.layer.cornerRadius = 8
     }
 
     override func didReceiveMemoryWarning() {
