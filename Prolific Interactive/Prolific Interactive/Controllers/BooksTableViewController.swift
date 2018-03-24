@@ -17,55 +17,46 @@ class BooksTableViewController: UITableViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        fetchBooks()
+    }
+    
+    func fetchBooks() {
         let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books")!
         
         URLSession.shared.dataTask(with: url) {data,response,error in
-            //checking error
+            guard error == nil else {
+                return
+            }
             
             //checking response
             do {
                 self.bookDetails = try JSONDecoder().decode([BookDetails].self, from: data!)
-                DispatchQueue.main.async { // Correct
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-                
-                
-                
             } catch let jsonError {
                 print("Error parsing jsonData :- \(jsonError)")
             }
-            
-            }.resume()
+        }.resume()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return bookDetails.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "books", for: indexPath) as! BooksTableViewCell
-
-        // Configure the cell...
         cell.bookTitle.text = bookDetails[indexPath.row].title
         cell.bookAuthors.text = bookDetails[indexPath.row].author
         return cell
@@ -105,7 +96,34 @@ class BooksTableViewController: UITableViewController {
         return true
     }
     */
-
+    @IBAction func pressedDeleteBtn(_ sender: Any) {
+        let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/clean")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        var headers = request.allHTTPHeaderFields ?? [:]
+        headers["Content-Type"] = "application/json"
+        request.allHTTPHeaderFields = headers
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request) { (responseData, response, responseError) in
+            guard responseError == nil else {
+                return
+            }
+            
+            if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
+                print("All book Deleted: ", utf8Representation)
+                self.fetchBooks()
+                
+            } else {
+                print("All book not deleted")
+                self.fetchBooks()
+            }
+        }
+        task.resume()
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "bookDetailsSegue" {
