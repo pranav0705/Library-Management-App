@@ -11,6 +11,7 @@ import UIKit
 class BooksTableViewController: UITableViewController {
 
     var bookDetails = [BookDetails]()
+    var imageNumbers = [Int:String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,8 +67,17 @@ class BooksTableViewController: UITableViewController {
             cell.bookCheckedOutBy.text = ""
         }
         
-        let image : UIImage = UIImage(named:"Book1")!
-        cell.bookImage.image = image
+        if let imageNumExists = imageNumbers[indexPath.row] {
+            let image : UIImage = UIImage(named:"Book\(imageNumExists)")!
+            cell.bookImage.image = image
+        } else {
+            let bookNum = arc4random_uniform(5) + 1;
+            imageNumbers[indexPath.row] = String(bookNum)
+            let image : UIImage = UIImage(named:"Book\(String(bookNum))")!
+            cell.bookImage.image = image
+        }
+        
+        
         
         let content : UIView = cell.viewWithTag(2) as UIView!
         content.backgroundColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
