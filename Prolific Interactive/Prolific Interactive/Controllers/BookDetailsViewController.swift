@@ -27,7 +27,6 @@ class BookDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         setupUI()
         
         
@@ -86,11 +85,36 @@ class BookDetailsViewController: UIViewController {
     }
     
     @IBAction func pressedCheckoutBtn(_ sender: Any) {
-       
-        
-        //_ = navigationController?.popViewController(animated: true)
     }
    
+    @IBAction func pressedDeleteBtn(_ sender: Any) {
+        
+        let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books/\(receivedId!)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        var headers = request.allHTTPHeaderFields ?? [:]
+        headers["Content-Type"] = "application/json"
+        request.allHTTPHeaderFields = headers
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request) { (responseData, response, responseError) in
+            guard responseError == nil else {
+                //
+                return
+            }
+            
+            if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
+                print("Book Deleted: ", utf8Representation)
+                self.popUpViewController()
+            } else {
+                print("Book not deleted")
+                 self.popUpViewController()
+            }
+        }
+        task.resume()
+       
+    }
     
     // MARK: - Navigation
 
@@ -143,5 +167,11 @@ extension BookDetailsViewController: refreshBookDetails {
         
     }
     
+    func popUpViewController() {
+        DispatchQueue.main.async {
+            _ = self.navigationController?.popViewController(animated: true)
+        }
+        
+    }
     
 }
