@@ -115,6 +115,7 @@ class BookDetailsViewController: UIViewController {
             let viewController = segue.destination as! CheckoutViewController
             viewController.delegate = self
             viewController.receivedBookid = receivedId!
+            viewController.receivedBookTitle = receivedBookTitle!
         }
         
     }

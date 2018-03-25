@@ -15,7 +15,9 @@ protocol refreshBookDetails {
 class CheckoutViewController: UIViewController {
 
     var receivedBookid: String?
+    var receivedBookTitle: String?
     
+    @IBOutlet weak var bookTitle: UILabel!
     var delegate: refreshBookDetails!
     
     @IBOutlet weak var nameTxtField: UITextField!
@@ -71,7 +73,7 @@ class CheckoutViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        bookTitle.text = receivedBookTitle!
     }
     
     /*
