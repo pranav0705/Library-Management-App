@@ -30,35 +30,14 @@ class BookDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        let shareBtn = UIBarButtonItem(image: UIImage(named: "share"), style: .plain, target: self, action: #selector(shareBtnTapped))
+        navigationItem.rightBarButtonItems = [shareBtn]
+    }
+    
+    @objc func shareBtnTapped() {
         
-        
-        
-//
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-//        let UTCDate = dateFormatter.date(from: receivedBookLastCheckedOutTime!)
-//
-//        dateFormatter.dateFormat = "yyyy-MMM-dd hh:mm a" // Output Format
-//        dateFormatter.timeZone = TimeZone.current
-//        let UTCToCurrentFormat = dateFormatter.string(from: UTCDate!)
-//
-//        let date = dateFormatter.date(from: receivedBookLastCheckedOutTime!) //according to date format your date string
-//        print(receivedBookLastCheckedOutTime!)
-//        print(UTCDate!)
-//        print(date ?? "") //Convert String to Date
-//        print(UTCToCurrentFormat)
-//        if date != nil {
-//            dateFormatter.dateFormat = "MMM d, yyyy HH:mm a" //Your New Date format as per requirement change it own
-//            let newDate = dateFormatter.string(from: date!) //pass Date here
-//            print(newDate) //New formatted Date string
-//
-//            bookLastCheckedOut.text = "\(String(describing: receivedBookLastCheckedOut)) @ \(newDate)"
-//
-//        }
-        
-        
-        
+        let activityViewController = UIActivityViewController(activityItems: [receivedBookTitle! as NSString], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: {})
     }
 
     func setupUI() {
@@ -136,6 +115,7 @@ class BookDetailsViewController: UIViewController {
             let viewController = segue.destination as! CheckoutViewController
             viewController.delegate = self
             viewController.receivedBookid = receivedId!
+            viewController.receivedBookTitle = receivedBookTitle!
         }
         
     }
