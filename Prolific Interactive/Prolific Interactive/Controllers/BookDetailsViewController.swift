@@ -116,6 +116,13 @@ class BookDetailsViewController: UIViewController {
             viewController.delegate = self
             viewController.receivedBookid = receivedId!
             viewController.receivedBookTitle = receivedBookTitle!
+        } else if segue.identifier == "editBooksSegue" {
+            let viewController = segue.destination as! EditBookViewController
+            viewController.receivedImage = receivedImage
+            viewController.receivedName = receivedBookTitle!
+            viewController.receivedAuthor = receivedBookAuthor!
+            viewController.receivedPublisher = receivedBookPublisher!
+            viewController.receivedTags = receivedBookTags!
         }
         
     }

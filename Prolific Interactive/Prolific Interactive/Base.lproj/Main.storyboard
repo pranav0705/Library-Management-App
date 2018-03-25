@@ -370,7 +370,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="1bS-Qc-NVo" kind="presentation" id="IqQ-ig-VjA"/>
+                                    <segue destination="1bS-Qc-NVo" kind="presentation" identifier="editBooksSegue" id="IqQ-ig-VjA"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBb-td-Ps4">
@@ -714,7 +714,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qib-5U-Y7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2453.5999999999999" y="884.70764617691157"/>
+            <point key="canvasLocation" x="2454" y="931"/>
         </scene>
         <!--Checkout View Controller-->
         <scene sceneID="YWd-uh-gRC">

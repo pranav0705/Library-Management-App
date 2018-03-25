@@ -15,15 +15,24 @@ class EditBookViewController: UIViewController {
     @IBOutlet weak var bookAuthorTxtField: UITextField!
     @IBOutlet weak var bookPublisherTxtField: UITextField!
     @IBOutlet weak var bookNameTxtField: UITextField!
+    
+    var receivedImage: UIImage?
+    var receivedName: String?
+    var receivedAuthor: String?
+    var receivedPublisher: String?
+    var receivedTags: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupUI()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func setupUI() {
+        bookNameTxtField.text = receivedName!
+        bookAuthorTxtField.text = receivedAuthor!
+        bookPublisherTxtField.text = receivedPublisher!
+        bookTagsTxtField.text = receivedTags!
+        bookImage.image = receivedImage!
     }
     
 
