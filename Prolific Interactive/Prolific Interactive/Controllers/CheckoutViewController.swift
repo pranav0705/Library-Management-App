@@ -12,7 +12,7 @@ protocol refreshBookDetails {
     func refresh()
 }
 
-class CheckoutViewController: UIViewController {
+class CheckoutViewController: UIViewController, UITextFieldDelegate {
 
     var receivedBookid: String?
     var receivedBookTitle: String?
@@ -25,6 +25,12 @@ class CheckoutViewController: UIViewController {
     @IBAction func didPressedCloseBtn(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true;
+    }
+    
     @IBAction func didPressSubmitBtn(_ sender: Any) {
        
         if nameTxtField.text == "" {
@@ -73,7 +79,11 @@ class CheckoutViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nameTxtField.delegate = self
+        
         bookTitle.text = receivedBookTitle!
+        
     }
     
     /*

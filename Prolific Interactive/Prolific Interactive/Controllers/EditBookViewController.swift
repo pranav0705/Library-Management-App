@@ -12,7 +12,7 @@ protocol updateBookDetails {
     func update()
 }
 
-class EditBookViewController: UIViewController {
+class EditBookViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var bookTagsTxtField: UITextField!
     @IBOutlet weak var bookImage: UIImageView!
@@ -29,8 +29,19 @@ class EditBookViewController: UIViewController {
     
     var delegate: updateBookDetails!
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true;
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bookNameTxtField.delegate = self
+        bookAuthorTxtField.delegate = self
+        bookPublisherTxtField.delegate = self
+        bookTagsTxtField.delegate = self
+        
         setupUI()
     }
     
