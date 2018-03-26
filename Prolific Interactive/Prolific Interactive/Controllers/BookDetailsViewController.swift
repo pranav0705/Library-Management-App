@@ -180,17 +180,15 @@ extension BookDetailsViewController : updateBookDetails {
                 guard let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String:Any] else { return }
                 
                 DispatchQueue.main.async {
-//                    self.bookTitle.text = (json["title"] as! String)
-//                    self.bookAuthor.text = (json["author"] as! String)
-//                    self.bookPublisher.text = (json["publisher"] as! String)
-//                    self.bookTags.text = (json["categories"] as! String)
+                    self.bookTitle.text = (json["title"] as! String)
+                    self.bookAuthor.text = (json["author"] as! String)
+                    self.bookPublisher.text = (json["publisher"] as! String)
+                    self.bookTags.text = (json["categories"] as! String)
                     
                     self.receivedBookTitle = (json["title"] as! String)
                     self.receivedBookAuthor = (json["author"] as! String)
                     self.receivedBookPublisher = (json["publisher"] as! String)
                     self.receivedBookTags = (json["categories"] as! String)
-                    
-                    self.setupUI()
                 }
                 
                 
