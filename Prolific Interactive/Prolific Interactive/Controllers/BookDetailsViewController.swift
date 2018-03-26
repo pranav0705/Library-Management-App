@@ -106,11 +106,9 @@ class BookDetailsViewController: UIViewController {
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
+
         if segue.identifier == "openCheckoutPopUpSegue" {
             let viewController = segue.destination as! CheckoutViewController
             viewController.delegate = self
@@ -137,9 +135,6 @@ extension BookDetailsViewController: refreshBookDetails {
         let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books/\(receivedId!)")!
         
         URLSession.shared.dataTask(with: url) {data,response,error in
-            //checking error
-            
-            //checking response
             do {
                 guard let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String:Any] else { return }
                 
@@ -181,9 +176,6 @@ extension BookDetailsViewController : updateBookDetails {
         let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books/\(receivedId!)")!
         
         URLSession.shared.dataTask(with: url) {data,response,error in
-            //checking error
-            
-            //checking response
             do {
                 guard let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String:Any] else { return }
                 
