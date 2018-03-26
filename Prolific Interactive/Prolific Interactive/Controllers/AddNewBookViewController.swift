@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNewBookViewController: UIViewController {
+class AddNewBookViewController: UIViewController, UITextFieldDelegate {
     
 
     @IBOutlet weak var bookTitle: UITextField!
@@ -16,8 +16,20 @@ class AddNewBookViewController: UIViewController {
     @IBOutlet weak var bookPublisher: UITextField!
     @IBOutlet weak var bookCategories: UITextField!
     @IBOutlet weak var submitBtn: UIButton!
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true;
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bookTitle.delegate = self
+        bookAuthor.delegate = self
+        bookPublisher.delegate = self
+        bookCategories.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {

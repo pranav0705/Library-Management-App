@@ -116,6 +116,15 @@ class BookDetailsViewController: UIViewController {
             viewController.delegate = self
             viewController.receivedBookid = receivedId!
             viewController.receivedBookTitle = receivedBookTitle!
+        } else if segue.identifier == "editBooksSegue" {
+            let viewController = segue.destination as! EditBookViewController
+            viewController.receivedImage = receivedImage
+            viewController.receivedName = receivedBookTitle!
+            viewController.receivedAuthor = receivedBookAuthor!
+            viewController.receivedPublisher = receivedBookPublisher!
+            viewController.receivedTags = receivedBookTags!
+            viewController.receivedId = receivedId!
+            viewController.delegate = self
         }
         
     }
@@ -148,6 +157,8 @@ extension BookDetailsViewController: refreshBookDetails {
                     self.bookLastCheckedOut.text = "\(json["lastCheckedOutBy"]!) @ \(checkedOutTimeInLocal)"
                 }
                 
+               
+                
             } catch let jsonErr {
                 print(jsonErr)
             }
@@ -162,5 +173,42 @@ extension BookDetailsViewController: refreshBookDetails {
         }
         
     }
+    
+}
+
+extension BookDetailsViewController : updateBookDetails {
+    func update() {
+        let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books/\(receivedId!)")!
+        
+        URLSession.shared.dataTask(with: url) {data,response,error in
+            //checking error
+            
+            //checking response
+            do {
+                guard let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String:Any] else { return }
+                
+                DispatchQueue.main.async {
+//                    self.bookTitle.text = (json["title"] as! String)
+//                    self.bookAuthor.text = (json["author"] as! String)
+//                    self.bookPublisher.text = (json["publisher"] as! String)
+//                    self.bookTags.text = (json["categories"] as! String)
+                    
+                    self.receivedBookTitle = (json["title"] as! String)
+                    self.receivedBookAuthor = (json["author"] as! String)
+                    self.receivedBookPublisher = (json["publisher"] as! String)
+                    self.receivedBookTags = (json["categories"] as! String)
+                    
+                    self.setupUI()
+                }
+                
+                
+                
+            } catch let jsonErr {
+                print(jsonErr)
+            }
+            
+            }.resume()
+    }
+    
     
 }
