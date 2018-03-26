@@ -518,6 +518,9 @@
                                                 <real key="value" value="16"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="pressedSaveBtn:" destination="1bS-Qc-NVo" eventType="touchUpInside" id="Lt6-8N-xeh"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYx-Kh-siD" customClass="StyledButtons" customModule="Prolific_Interactive" customModuleProvider="target">
                                         <rect key="frame" x="8" y="348" width="343" height="30"/>

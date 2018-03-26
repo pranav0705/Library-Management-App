@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol updateBookDetails {
+    func update()
+}
+
 class EditBookViewController: UIViewController {
 
     @IBOutlet weak var bookTagsTxtField: UITextField!
@@ -21,6 +25,9 @@ class EditBookViewController: UIViewController {
     var receivedAuthor: String?
     var receivedPublisher: String?
     var receivedTags: String?
+    var receivedId: String?
+    
+    var delegate: updateBookDetails!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +45,42 @@ class EditBookViewController: UIViewController {
 
     @IBAction func pressedCancelBtn(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    @IBAction func pressedSaveBtn(_ sender: Any) {
+        
+        
+        let json: [String: Any] = ["title": bookNameTxtField.text!,"author":bookAuthorTxtField.text!,"publisher":bookPublisherTxtField.text!,"categories":bookTagsTxtField.text!]
+        let url = URL(string: "http://prolific-interview.herokuapp.com/5ab048aac98af80009c78420/books/\(String(describing: receivedId!))")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        var headers = request.allHTTPHeaderFields ?? [:]
+        headers["Content-Type"] = "application/json"
+        request.allHTTPHeaderFields = headers
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        request.httpBody = jsonData
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request) { (responseData, response, responseError) in
+            guard responseError == nil else {
+                //
+                return
+            }
+            
+            if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
+                print("Edited book: ", utf8Representation)
+                if let myDelegate = self.delegate {
+                    myDelegate.update()
+                    self.dismiss(animated: true, completion: nil)
+                }
+            } else {
+                print("Book not edited")
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+        task.resume()
+        
     }
     /*
     // MARK: - Navigation
