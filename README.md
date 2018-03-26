@@ -1,45 +1,75 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+How to Run?
+    Step 1 - Open Prolific Interactive.xcodeproj file from the directory after checking out from BitBucket ( https://pranav_bhandari@bitbucket.org/pranav_bhandari/prolificinteractive.git ).
+    Step 2 - Run the application by pressing cmd + R or the play button.
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+This is an iOS Application which tracks who has which book from the library. The app is entirely
+Built in swift 4. Users can add new books, checkout books, delete single book or the whole collection and can edit basic details of a book. The app tracks the user who has checked out the book by maintaining there name and checkout date timestamp.
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+Book’s Information : -
+We are maintaining all of the book’s information by using a struct that holds the information of various books in a model class called BookDetails.swift. The structure of the struct is as follows :-
 
----
+struct BookDetails: Decodable {
+var author: String?
+var categories: String?
+var id: Int?
+var lastCheckedOut: String?
+var lastCheckedOutBy: String?
+var publisher: String?
+var title: String?
+var url: String?
+}
 
-## Edit a file
+Additionally to improve the UI of the app, we tried to maintain a consistent uiview and uibutton layout throughout the app using designable class :- StyledButtons.swift & UIView+Utils.swift. We are able to control various properties such as corner radius, background color, border width etc within a single class rather than having the need to write it in every class.
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
+StyledButtons.swift :-
+@IBDesignable class StyledButtons: UIButton {
+@IBInspectable var cornerRadius: CGFloat = 0 {
+didSet {
+self.layer.cornerRadius = cornerRadius
+}
+}
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+@IBInspectable var backgroundClr: UIColor = UIColor.clear {
+didSet {
+self.layer.backgroundColor = backgroundClr.cgColor
+}
+}
 
----
+@IBInspectable var borderClr: UIColor = UIColor.clear {
+didSet {
+self.layer.borderColor = borderClr.cgColor
+}
+}
 
-## Create a file
+@IBInspectable var borderWidth: CGFloat = 0 {
+didSet {
+self.layer.borderWidth = borderWidth
+}
+}
+}
 
-Next, you’ll add a new file to this repository.
+We are using UITableView to display all the books (It is also our home screen). We are using custom UITableViewCells which has fields the fields to display Book Title, Authors, Image and check-out person name.
 
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
+BooksTableiewCell.swift :-
+class BooksTableViewCell: UITableViewCell {
 
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+@IBOutlet weak var bookTitle: UILabel!
+@IBOutlet weak var bookAuthors: UILabel!
+@IBOutlet weak var bookCheckedOutBy: UILabel!
+@IBOutlet weak var bookImage: UIImageView!
 
----
+override func awakeFromNib() {
+super.awakeFromNib()
+// Initialization code
+}
 
-## Clone a repository
+}
+￼
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+Complete book details are displayed in the BookDetailsViewController.swift class. We are displaying a pop-up view when someone wants to checkout a book or wants to edit the existing details of a book. Only book title, author, publisher and categories/tags can be changed or edited currently. While checking out a book, name is mandatory in order to track the user. The user can also share the book’s title using the share button.
+￼
+We can add a new book using the ‘+’ icon in the home screen. The user has to enter details like title, author, publisher and tags to add a new book. All the fields are mandatory and it will display an alert if any of the field is missing. On the other hand, if the information is filled and user accidentally presses the done button, it will display an alert message saying book not submitted.
+￼
+The user can delete a single book from the book’s details page or can delete all the books from the home screen by touching delete all button. An alert will be shown in either of the case.
+￼
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
-
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).

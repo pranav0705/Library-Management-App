@@ -81,7 +81,6 @@ class CheckoutViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         nameTxtField.delegate = self
-        
         bookTitle.text = receivedBookTitle!
         
     }
